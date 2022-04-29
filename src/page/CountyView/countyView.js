@@ -37,7 +37,8 @@ import {
 } from "semantic-ui-react";
 import { SVGMap, Taiwan, RadioSVGMap } from "react-svg-map";
 import Multiselect from "multiselect-react-dropdown";
-import CountyMapView from "../../components/countyMapView";
+import CountyMapView from "../../components/CountyMapView";
+import MapCountyModal from "../../components/MapCountyModal/MapCountyModal";
 
 import { backendTo } from "../../utils/backendUtils";
 import { USACounties } from "../../usaCounties/usaCounties";
@@ -134,9 +135,9 @@ export default class CountyView extends Component {
     this.setState({ tooltipStyle });
   }
 
-  setCountyMapModal(open) {
+  setCountyMapModal = (open) => {
     this.setState({ countyMapModalOpen: open });
-  }
+  };
 
   async handleOnLocationClick(event) {
     let county = this.state.pointedLocation.toString().split(",")[0];
@@ -193,11 +194,11 @@ export default class CountyView extends Component {
     // console.log(this.state.pointedLocation);
   }
 
-  getLocationClassName(location, index) {
+  getLocationClassName = (location, index) => {
     // Generate random heat map
     // console.log(location.name)
     return `fillColorHeat${index % 4}`;
-  }
+  };
 
   async componentDidMount() {
     await axios.get(backendTo("fetchAllData")).then((res) => {
@@ -344,42 +345,6 @@ export default class CountyView extends Component {
     });
   };
 
-  countyMapView() {
-    return (
-      <div>
-        <Form.Group widths="equal">
-          <Form.Field
-            control={Dropdown}
-            search
-            selection
-            value={this.state.selectedStateInMapView}
-            options={dropDownStateFullNameList()}
-            onChange={this.selecteStateInMapView.bind(this)}
-          />
-          <Checkbox
-            label="Show USA Map"
-            value={this.state.showUsaMap}
-            onChange={this.checkboxOnChange}
-          />
-        </Form.Group>
-
-        <div className="CountyMap">
-          <SVGMap
-            map={this.state.selectedObjectInMapView}
-            locationClassName={this.getLocationClassName}
-            onLocationMouseOver={this.handleLocationMouseOver}
-            onLocationMouseOut={this.handleLocationMouseOut}
-            onLocationMouseMove={this.handleLocationMouseMove}
-            onLocationClick={this.handleOnLocationClick}
-          />
-        </div>
-        <div className="examples" style={this.state.tooltipStyle}>
-          {this.state.pointedLocation}
-        </div>
-      </div>
-    );
-  }
-
   simulateOption() {
     if (
       this.state.manyChartsButton === "blue" &&
@@ -517,7 +482,7 @@ export default class CountyView extends Component {
     }
   }
 
-  countyMapChartView(countyName) {
+  countyMapChartView = (countyName) => {
     let copyData2020 = jsonParseStringify(this.state.data_2020),
       copyData2021 = jsonParseStringify(this.state.data_2021);
 
@@ -582,60 +547,7 @@ export default class CountyView extends Component {
         )}
       </div>
     );
-  }
-
-  mapCountyModal() {
-    if (this.state.errorMessageOpen) {
-      return (
-        <Modal
-          onClose={() => this.setCountyMapModal(false)}
-          onOpen={() => this.setCountyMapModal(true)}
-          open={this.state.countyMapModalOpen}
-        >
-          <Modal.Header>{"County data is not available"}</Modal.Header>
-
-          <Modal.Content>
-            {"Sorry, the county data will be available soon"}
-          </Modal.Content>
-          <Modal.Actions>
-            <Button
-              content="Close"
-              labelPosition="right"
-              icon="checkmark"
-              onClick={() => this.setCountyMapModal(false)}
-              positive
-            />
-          </Modal.Actions>
-        </Modal>
-      );
-    }
-    return (
-      <Modal
-        onClose={() => this.setCountyMapModal(false)}
-        onOpen={() => this.setCountyMapModal(true)}
-        open={this.state.countyMapModalOpen}
-        size={"large"}
-      >
-        <Modal.Header>{this.state.selectCountyName}</Modal.Header>
-
-        <Modal.Content>
-          {this.countyMapChartView(this.state.selectCountyName.split(",")[0])}
-        </Modal.Content>
-        <Modal.Actions>
-          <Button color="black" onClick={() => this.setCountyMapModal(false)}>
-            Suggestions
-          </Button>
-          <Button
-            content="Yep, that's great"
-            labelPosition="right"
-            icon="checkmark"
-            onClick={() => this.setCountyMapModal(false)}
-            positive
-          />
-        </Modal.Actions>
-      </Modal>
-    );
-  }
+  };
 
   displayButton() {
     if (this.state.chartButton === "blue" || this.state.mapButton === "blue") {
@@ -716,7 +628,13 @@ export default class CountyView extends Component {
             tooltipStyle={this.state.tooltipStyle}
             pointedLocation={this.state.pointedLocation}
           />
-          {this.mapCountyModal()}
+
+          {/* {this.mapCountyModal()} */}
+          <MapCountyModal
+            setCountyMapModal={this.setCountyMapModal}
+            state={this.state}
+            countyMapChartView={this.countyMapChartView}
+          />
         </div>
       );
     } else if (
