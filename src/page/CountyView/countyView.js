@@ -29,26 +29,16 @@ import {
   Header,
   Button,
   Form,
-  Input,
-  Select,
-  Modal,
-  TransitionablePortal,
-  Checkbox,
 } from "semantic-ui-react";
-import { SVGMap, Taiwan, RadioSVGMap } from "react-svg-map";
 import Multiselect from "multiselect-react-dropdown";
 import CountyMapView from "../../components/CountyMapView";
 import MapCountyModal from "../../components/MapCountyModal/MapCountyModal";
+import DisplayButton from "../../components/DisplayButton/DisplayButton";
 
 import { backendTo } from "../../utils/backendUtils";
 import { USACounties } from "../../usaCounties/usaCounties";
 import { texasCounties } from "../../usaCounties/texasCounties";
-import {
-  dropDownStateFullNameList,
-  generateSVGMap,
-  parseCountyList,
-  returnFullNameList,
-} from "../../utils/usCountiesUtils";
+import { generateSVGMap, parseCountyList } from "../../utils/usCountiesUtils";
 const usaCounties = USACounties();
 const texasMap = texasCounties();
 export function getLocationName(event) {
@@ -266,24 +256,22 @@ export default class CountyView extends Component {
 
   onSelect(selectedList, selectedItem) {
     if (selectedList && selectedList.length >= 1) {
-      this.state.selectText = "Backspace to remove ";
+      this.setState({ selectText: "Backspace to remove " });
     } else {
-      this.state.selectText = "Select...";
+      this.setState({ selectText: "Select..." });
     }
     this.setState({
-      selectText: this.state.selectText,
       selectedCountyList: selectedList,
     });
   }
 
   onRemove(selectedList, removedItem) {
     if (selectedList && selectedList.length >= 1) {
-      this.state.selectText = "Backspace to remove ";
+      this.setState({ selectText: "Backspace to remove " });
     } else {
-      this.state.selectText = "Select...";
+      this.setState({ selectText: "Select..." });
     }
     this.setState({
-      selectText: this.state.selectText,
       selectedCountyList: selectedList,
     });
   }
@@ -431,56 +419,41 @@ export default class CountyView extends Component {
     }
   }
 
-  switchViewOnClick(input) {
+  switchViewOnClick = (input) => {
     if (input === 1) {
-      this.state.oneChartButton = "blue";
-      this.state.manyChartsButton = "";
-      this.state.mapButton = "";
-      this.state.chartButton = "";
+      this.setState({
+        oneChartButton: "blue",
+        manyChartsButton: "",
+        mapButton: "",
+        chartButton: "",
+      });
     } else if (input === 2) {
-      this.state.oneChartButton = "";
-      this.state.manyChartsButton = "blue";
+      this.setState({
+        oneChartButton: "",
+        manyChartsButton: "blue",
+      });
     } else if (input === 3) {
       if (this.state.simulateButton === "blue") {
-        this.state.simulateButton = "";
+        this.setState({ simulateButton: "" });
       } else {
-        this.state.simulateButton = "blue";
+        this.setState({ simulateButton: "blue" });
       }
     } else if (input === -1) {
-      this.state.mapButton = "blue";
-      this.state.chartButton = "";
-      this.state.manyChartsButton = "";
-      this.state.oneChartButton = "";
+      this.setState({
+        oneChartButton: "",
+        manyChartsButton: "",
+        mapButton: "blue",
+        chartButton: "",
+      });
     } else if (input === 0) {
-      this.state.mapButton = "";
-      this.state.chartButton = "";
-      this.state.manyChartsButton = "";
-      this.state.oneChartButton = "blue";
+      this.setState({
+        oneChartButton: "blue",
+        manyChartsButton: "",
+        mapButton: "",
+        chartButton: "",
+      });
     }
-    this.setState({
-      manyChartsButton: this.state.manyChartsButton,
-      oneChartButton: this.state.oneChartButton,
-      simulateButton: this.state.simulateButton,
-      mapButton: this.state.mapButton,
-      chartButton: this.state.chartButton,
-    });
-  }
-
-  simulateButtonReturn() {
-    if (this.state.manyChartsButton === "blue") {
-      return (
-        <Button
-          basic
-          color={this.state.simulateButton}
-          onClick={() => {
-            this.switchViewOnClick(3);
-          }}
-        >
-          Analyze
-        </Button>
-      );
-    }
-  }
+  };
 
   countyMapChartView = (countyName) => {
     let copyData2020 = jsonParseStringify(this.state.data_2020),
@@ -548,61 +521,6 @@ export default class CountyView extends Component {
       </div>
     );
   };
-
-  displayButton() {
-    if (this.state.chartButton === "blue" || this.state.mapButton === "blue") {
-      return (
-        <div>
-          <Button
-            basic
-            color={this.state.mapButton}
-            onClick={() => this.switchViewOnClick(-1)}
-          >
-            Map View
-          </Button>
-          <Button
-            basic
-            color={this.state.chartButton}
-            onClick={() => this.switchViewOnClick(1)}
-          >
-            Chart View
-          </Button>
-        </div>
-      );
-    } else if (
-      this.state.manyChartsButton === "blue" ||
-      this.state.simulateButton === "blue" ||
-      this.state.oneChartButton === "blue"
-    ) {
-      return (
-        <div>
-          <Button
-            labelPosition="left"
-            icon="left chevron"
-            content="Back"
-            onClick={() => {
-              this.switchViewOnClick(-1);
-            }}
-          />
-          <Button
-            basic
-            color={this.state.oneChartButton}
-            onClick={() => this.switchViewOnClick(1)}
-          >
-            All In One
-          </Button>
-          <Button
-            basic
-            color={this.state.manyChartsButton}
-            onClick={() => this.switchViewOnClick(2)}
-          >
-            Split Views
-          </Button>
-          {this.simulateButtonReturn()}
-        </div>
-      );
-    }
-  }
 
   sectionDisplay() {
     //{ selectedStateInMapView, selecteStateInMapView, showUsaMap, onChange, mapControllers,tooltipStyle,pointedLocation }
@@ -683,7 +601,12 @@ export default class CountyView extends Component {
             " County View"}
         </Header>
         <Header as="h3" textAlign="center">
-          <Button.Group basic>{this.displayButton()}</Button.Group>
+          <Button.Group basic>
+            <DisplayButton
+              state={this.state}
+              switchViewOnClick={this.switchViewOnClick}
+            />
+          </Button.Group>
         </Header>
 
         <br />
