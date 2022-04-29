@@ -34,6 +34,7 @@ import Multiselect from "multiselect-react-dropdown";
 import CountyMapView from "../../components/CountyMapView";
 import MapCountyModal from "../../components/MapCountyModal/MapCountyModal";
 import DisplayButton from "../../components/DisplayButton/DisplayButton";
+import SimulateOption from "../../components/SimulateOption/SimulateOption";
 
 import { backendTo } from "../../utils/backendUtils";
 import { USACounties } from "../../usaCounties/usaCounties";
@@ -276,9 +277,9 @@ export default class CountyView extends Component {
     });
   }
 
-  selectShiftDays(e, { value }) {
+  selectShiftDays = (e, { value }) => {
     this.setState({ shiftDays: value });
-  }
+  };
 
   selecteStateInMapView = async (e, { value }) => {
     let object = generateSVGMap(value);
@@ -310,13 +311,13 @@ export default class CountyView extends Component {
     });
   };
 
-  selectMovingAverageDays(e, { value }) {
+  selectMovingAverageDays = (e, { value }) => {
     this.setState({ movingAverageDays: value });
-  }
+  };
 
-  selectMedianFilterDays(e, { value }) {
+  selectMedianFilterDays = (e, { value }) => {
     this.setState({ medianFiltersDays: value });
-  }
+  };
 
   checkboxOnChange = (event, data) => {
     let defaultObjectView = texasMap;
@@ -333,54 +334,6 @@ export default class CountyView extends Component {
     });
   };
 
-  simulateOption() {
-    if (
-      this.state.manyChartsButton === "blue" &&
-      this.state.simulateButton === "blue"
-    ) {
-      return (
-        <div>
-          <Segment>
-            <Form>
-              <Form.Group widths="equal">
-                <Form.Field
-                  control={Dropdown}
-                  label="Shift Days"
-                  search
-                  selection
-                  value={this.state.shiftDays}
-                  options={returnOption(10)}
-                  placeholder="Shift Days"
-                  onChange={this.selectShiftDays.bind(this)}
-                />
-                <Form.Field
-                  control={Dropdown}
-                  label="Moving Average Days"
-                  value={this.state.movingAverageDays}
-                  search
-                  selection
-                  options={returnOption(30)}
-                  placeholder="Moving Average Days"
-                  onChange={this.selectMovingAverageDays.bind(this)}
-                />
-                <Form.Field
-                  control={Dropdown}
-                  label="Median Filters Days"
-                  value={this.state.medianFiltersDays}
-                  search
-                  selection
-                  options={returnOption(30)}
-                  placeholder="Median Filters"
-                  onChange={this.selectMedianFilterDays.bind(this)}
-                />
-              </Form.Group>
-            </Form>
-          </Segment>
-        </div>
-      );
-    }
-  }
-
   viewReturn() {
     if (this.state.oneChartButton === "blue") {
       return searchBarAllInOneFunction(
@@ -392,7 +345,12 @@ export default class CountyView extends Component {
     } else if (this.state.manyChartsButton === "blue") {
       return (
         <div>
-          {this.simulateOption()}
+          <SimulateOption
+            state={this.state}
+            selectShiftDays={this.selectShiftDays}
+            selectMovingAverageDays={this.selectMovingAverageDays}
+            selectMedianFilterDays={this.selectMedianFilterDays}
+          />
           <Menu compact style={{ position: "absolute", right: "50px" }}>
             <Dropdown
               value={this.state.selectYearInSearch}
@@ -536,7 +494,6 @@ export default class CountyView extends Component {
     if (this.state.chartButton === "blue" || this.state.mapButton === "blue") {
       return (
         <div>
-          {/* {this.countyMapView()} */}
           <CountyMapView
             selectedStateInMapView={this.state.selectedStateInMapView}
             selecteStateInMapView={this.selecteStateInMapView}
@@ -547,7 +504,6 @@ export default class CountyView extends Component {
             pointedLocation={this.state.pointedLocation}
           />
 
-          {/* {this.mapCountyModal()} */}
           <MapCountyModal
             setCountyMapModal={this.setCountyMapModal}
             state={this.state}
