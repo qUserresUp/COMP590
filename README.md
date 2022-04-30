@@ -96,7 +96,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 **index.js** is the entry file of the project
 The main page address is `src/page/CountyView/countyView.js`
-The main page is divided into several modules, which are stored in the `src/component folder`
+The main page is divided into several modules, which are stored in the `src/component` folder
 
 ### Components
 
