@@ -1,4 +1,5 @@
 ## Basic Information
+
 This is the frontend code of the Rice COMP590 Hope-Simpson Project Map part
 
 The project can display the number of confirmed epidemics and trends in each state (or even each county) in the United States in 2020 and 2021 in a map or table mode.
@@ -33,6 +34,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 
 ## Project directory structure
+
+```
 .
 ├── App.css
 ├── App.js
@@ -81,6 +84,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     └── usCountiesUtils.js
 
 14 directories, 31 files
+```
 
 ## Code function brief
 
