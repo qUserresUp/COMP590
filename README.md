@@ -1,9 +1,16 @@
 ## Basic Information
 
-This is the frontend code of the Rice COMP590 Hope-Simpson Project Map part
+This is the refactored frontend code of the Rice COMP590 Hope-Simpson Project Map part
 
 The project can display the number of confirmed epidemics and trends in each state (or even each county) in the United States in 2020 and 2021 in a map or table mode.
 
+# Project Introduction
+
+The frontend application UI consists of two main parts, map view and chart view of Texas COVID-19 data, users can switch the view by toggling buttons at the top of the page. A Texas map is the default view of the webapp where users can hover the mouse around it to see each county name. Once a user clicks on a county, a chart will show up with the past COVID-19 data displayed. There are two filters, year and quarter, for users to customize for their intended view of data. There is another "Chart View" button on the home page. Once clicked, can take users to a more customizable and detailed view of data. Users can select the county through a search bar. Once users have selected the county, they can get a customized chart of the numbers of shift days, the number of moving average days and the median filters days of their choice.
+
+## Refactor Function and Components
+
+Originally, all the functionalities are located inside one main component. The monolithic structure makes the application hard to scale and debug. We have managed to break down the structure and turns many parts into smaller and reusable components. It helps future developers to build on top of the current frontend codebase.
 
 ## How to start the Project
 
@@ -31,7 +38,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 
 ## Project directory structure
 
@@ -92,8 +98,22 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 The main page address is `src/page/CountyView/countyView.js`
 The main page is divided into several modules, which are stored in the `src/component folder`
 
-- DisplayButton is the button menu structure of the header, responsible for switching between different display modes
-- The files in countyMapView form a map schema that displays confirmed diagnoses data within a state by selecting a state
-- MapCountyModal is the pop-up structure of the diagnosis chart in the county displayed after clicking on the map
-- SimulateOption is a menu bar for analyzing chart information in chart view mode
-- loadingWidgets is the state displayed by the front-end while waiting for the back-end result data to return
+### Components
+
+- `DisplayButton` is the button menu structure of the header, responsible for switching between different display modes
+- `CountyMapView` form a map schema that displays confirmed diagnoses data within a state by selecting a state
+- `MapCountyModal` is the pop-up structure of the diagnosis chart in the county displayed after clicking on the map
+- `SimulateOption` is a menu bar for analyzing chart information in chart view mode
+- `loadingWidgets` is the state displayed by the front-end while waiting for the back-end result data to return
+
+### Pages
+
+- `CountyView` is the main page for this application, it manages the states for all the components and state manipulation functions.
+
+## Technologies used
+
+ReactJS
+axios
+semantic-ui-react
+
+## Demo and Graphics
