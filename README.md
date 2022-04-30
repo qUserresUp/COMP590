@@ -128,3 +128,9 @@ The main page is divided into several modules, which are stored in the `src/comp
 - semantic-ui-react
 
 ## Demo and Graphics
+
+![Alt text](./screenshots/ChartView.png?raw=true)
+![Alt text](./screenshots/ChartView2.png?raw=true)
+![Alt text](./screenshots/CountyView.png?raw=true)
+![Alt text](./screenshots/MultiChartView.png?raw=true)
+![Alt text](./screenshots/SplitChartView.png?raw=true)
