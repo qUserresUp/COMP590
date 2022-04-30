@@ -4,7 +4,7 @@ This is the refactored frontend code of the Rice COMP590 Hope-Simpson Project Ma
 
 The project can display the number of confirmed epidemics and trends in each state (or even each county) in the United States in 2020 and 2021 in a map or table mode.
 
-# Project Introduction
+## Project Introduction
 
 The frontend application UI consists of two main parts, map view and chart view of Texas COVID-19 data, users can switch the view by toggling buttons at the top of the page. A Texas map is the default view of the webapp where users can hover the mouse around it to see each county name. Once a user clicks on a county, a chart will show up with the past COVID-19 data displayed. There are two filters, year and quarter, for users to customize for their intended view of data. There is another "Chart View" button on the home page. Once clicked, can take users to a more customizable and detailed view of data. Users can select the county through a search bar. Once users have selected the county, they can get a customized chart of the numbers of shift days, the number of moving average days and the median filters days of their choice.
 
