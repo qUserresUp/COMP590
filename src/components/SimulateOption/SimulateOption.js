@@ -7,7 +7,9 @@ export const SimulateOption = ({
   selectMovingAverageDays,
   selectMedianFilterDays,
 }) => {
-  if (state.manyChartsButton === "blue" && state.simulateButton === "blue") {
+  if (state.manyChartsButton && state.simulateButton) {
+    // When the analyze button is clicked, display the header information of the menu
+    // The method is implemented by the parent component
     return (
       <div>
         <Segment>

@@ -1,13 +1,14 @@
-import React, { useState, useEffect, memo } from "react";
-import { Button, Modal } from "semantic-ui-react";
+import React from "react";
+import { Button } from "semantic-ui-react";
 
 export const DisplayButton = ({ state, switchViewOnClick }) => {
+  // Display the corresponding buttons according to the different states of the header
   const simulateButtonReturn = () => {
-    if (state.manyChartsButton === "blue") {
+    if (state.manyChartsButton) {
       return (
         <Button
           basic
-          color={state.simulateButton}
+          color={state.simulateButton ? 'blue' : ''}
           onClick={() => {
             switchViewOnClick(3);
           }}
@@ -17,19 +18,19 @@ export const DisplayButton = ({ state, switchViewOnClick }) => {
       );
     }
   };
-  if (state.chartButton === "blue" || state.mapButton === "blue") {
+  if (state.chartButton || state.mapButton) {
     return (
       <div>
         <Button
           basic
-          color={state.mapButton}
+          color={state.mapButton ? 'blue' : ''}
           onClick={() => switchViewOnClick(-1)}
         >
           Map View
         </Button>
         <Button
           basic
-          color={state.chartButton}
+          color={state.chartButton ? 'blue' : ''}
           onClick={() => switchViewOnClick(1)}
         >
           Chart View
@@ -37,9 +38,7 @@ export const DisplayButton = ({ state, switchViewOnClick }) => {
       </div>
     );
   } else if (
-    state.manyChartsButton === "blue" ||
-    state.simulateButton === "blue" ||
-    state.oneChartButton === "blue"
+    state.manyChartsButton || state.simulateButton || state.oneChartButton
   ) {
     return (
       <div>
@@ -48,19 +47,19 @@ export const DisplayButton = ({ state, switchViewOnClick }) => {
           icon="left chevron"
           content="Back"
           onClick={() => {
-            switchViewOnClick(-1);
+            switchViewOnClick(0);
           }}
         />
         <Button
           basic
-          color={state.oneChartButton}
+          color={state.oneChartButton ? 'blue' : ''}
           onClick={() => switchViewOnClick(1)}
         >
           All In One
         </Button>
         <Button
           basic
-          color={state.manyChartsButton}
+          color={state.manyChartsButton ? 'blue' : ''}
           onClick={() => switchViewOnClick(2)}
         >
           Split Views

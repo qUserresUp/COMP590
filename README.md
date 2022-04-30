@@ -1,10 +1,17 @@
-# Getting Started with Create React App
+## Basic Information
+This is the frontend code of the Rice COMP590 Hope-Simpson Project Map part
+
+The project can display the number of confirmed epidemics and trends in each state (or even each county) in the United States in 2020 and 2021 in a map or table mode.
+
+
+## How to start the Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### `npm install`
 
-In the project directory, you can run:
+This directive helps you to Install all the dependencies this project required in the local node_modules folder and generate a package-lock.json file based on the contents of the package.json file.\
+Note that changes to the package-lock.json file should not be uploaded.
 
 ### `npm start`
 
@@ -13,11 +20,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
@@ -29,42 +31,65 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project directory structure
+.
+├── App.css
+├── App.js
+├── App.test.js
+├── components
+│   ├── DisplayButton
+│   │   ├── DisplayButton.js
+│   │   └── index.js
+│   ├── MapChart
+│   │   └── countyMapView.js
+│   ├── MapCountyModal
+│   │   ├── MapCountyModal.js
+│   │   └── index.js
+│   ├── SimulateOption
+│   │   ├── SimulateOption.js
+│   │   └── index.js
+│   ├── countyMapView
+│   │   ├── CountyMapView.js
+│   │   └── index.js
+│   ├── csvToChart
+│   │   ├── csvToChart.js
+│   │   ├── csvToChartCSS
+│   │   ├── csvToChartWidgets.js
+│   │   ├── csvUtil.js
+│   │   └── data.js
+│   ├── csvWeb
+│   │   ├── constValuesUtils.js
+│   │   └── csvWeb.js
+│   └── loadingWidgets
+│       └── loadingWidgets.js
+├── examples-app.scss.css
+├── index.css
+├── index.js
+├── logo.svg
+├── page
+│   └── CountyView
+│       └── countyView.js
+├── reportWebVitals.js
+├── setupTests.js
+├── usaCounties
+│   ├── texasCounties.js
+│   └── usaCounties.js
+└── utils
+    ├── backendUtils.js
+    ├── countyViewUtil.js
+    └── usCountiesUtils.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+14 directories, 31 files
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Code function brief
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**index.js** is the entry file of the project
+The main page address is `src/page/CountyView/countyView.js`
+The main page is divided into several modules, which are stored in the `src/component folder`
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- DisplayButton is the button menu structure of the header, responsible for switching between different display modes
+- The files in countyMapView form a map schema that displays confirmed diagnoses data within a state by selecting a state
+- MapCountyModal is the pop-up structure of the diagnosis chart in the county displayed after clicking on the map
+- SimulateOption is a menu bar for analyzing chart information in chart view mode
+- loadingWidgets is the state displayed by the front-end while waiting for the back-end result data to return
