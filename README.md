@@ -112,8 +112,8 @@ The main page is divided into several modules, which are stored in the `src/comp
 
 ## Technologies used
 
-ReactJS
-axios
-semantic-ui-react
+- ReactJS
+- axios
+- semantic-ui-react
 
 ## Demo and Graphics
