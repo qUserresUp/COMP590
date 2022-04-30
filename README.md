@@ -110,6 +110,17 @@ The main page is divided into several modules, which are stored in the `src/comp
 
 - `CountyView` is the main page for this application, it manages the states for all the components and state manipulation functions.
 
+### utils
+
+- `backendUtils` provides a function that appends a user provided string to the current backend URL.
+- `countyViewutils` provides several helper functions for map display and data manipulation
+- `usCountiesutils` provides several helper functions for data parsing and manipulation
+
+### usaCounties
+
+- `texasCounties` provides a complete list of counties in Texas, their names, ids and locations
+- `texasCounties` provides a complete list of counties in USA, their names, ids and locations
+
 ## Technologies used
 
 - ReactJS
