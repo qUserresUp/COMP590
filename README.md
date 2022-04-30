@@ -12,6 +12,14 @@ The frontend application UI consists of two main parts, map view and chart view 
 
 Originally, all the functionalities are located inside one main component. The monolithic structure makes the application hard to scale and debug. We have managed to break down the structure and turns many parts into smaller and reusable components. It helps future developers to build on top of the current frontend codebase.
 
+## Demo and Graphics
+
+![Alt text](./screenshots/CountyView.png?raw=true)
+![Alt text](./screenshots/ChartView.png?raw=true)
+![Alt text](./screenshots/ChartView2.png?raw=true)
+![Alt text](./screenshots/MultiChartView.png?raw=true)
+![Alt text](./screenshots/SplitChartView.png?raw=true)
+
 ## How to start the Project
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -126,11 +134,3 @@ The main page is divided into several modules, which are stored in the `src/comp
 - ReactJS
 - axios
 - semantic-ui-react
-
-## Demo and Graphics
-
-![Alt text](./screenshots/ChartView.png?raw=true)
-![Alt text](./screenshots/ChartView2.png?raw=true)
-![Alt text](./screenshots/CountyView.png?raw=true)
-![Alt text](./screenshots/MultiChartView.png?raw=true)
-![Alt text](./screenshots/SplitChartView.png?raw=true)
